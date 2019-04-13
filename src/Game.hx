@@ -79,6 +79,8 @@ class Game extends hxd.App {
             inputMoveSpeed.text = inputMoveSpeed.text.substring(0, inputMoveSpeed.cursorIndex) + K.getKeyName(e.keyCode) + inputMoveSpeed.text.substr(inputMoveSpeed.cursorIndex);
             inputMoveSpeed.cursorIndex += 1;
             trace(e.keyCode);*/
+            //hello from develop
+            //hello from feature-test
         //}
     }
 
