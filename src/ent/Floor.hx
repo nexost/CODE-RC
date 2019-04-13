@@ -384,9 +384,9 @@ class Floor extends Entity{
             var spawnEnemy = (Std.random(2) == 0 ? true : false);
             if(spawnEnemy){
                 var milestone = Math.floor(this.id / 10) + 1;
-                var hp = (((id + 1) * 100) + Std.random(Math.round(((id + 1) * 100)/2))) * (milestone * milestone * milestone);
+                var hp = (((id + 1) * 100) + Std.random(Math.round(((id + 1) * 100)/2))) * Math.round((Math.pow(milestone, 2)));
                 var enemy = new Npc(i * tilePx + (tileWidth * 2) + tilePx / 2, footing - 1, true, hp);
-                enemy.x -= enemy.spr.tile.width / 2;
+                enemy.x -= enemy.drw.getSize().width / 2;
                 enemy.addTo(middleground);
                 noOfEnemies += 1;
                 enemies.push(enemy);

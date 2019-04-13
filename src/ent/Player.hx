@@ -88,13 +88,13 @@ class Player extends Character{
         var colHostile = collides(ent.Entity.ColType.HOSTILE);
         for(h in colHostile){
             if(h.T == Npc){
-                cast(h, Npc).currHp -= (level * level) / 2;
+                cast(h, Npc).currHp -= level * 2;//(level * level) / 2;
             }
         }
 
-        //spr.scaleX = -1.0;
-        spr.scaleX = (1.0 + (level / 100 <= 2.5 ? level / 100 : 2.5)) * facing;
-        spr.scaleY = (1.0 + (level / 100 <= 2.5 ? level / 100 : 2.5));
+        spr.scaleX = facing;
+        /*spr.scaleX = (1.0 + (level / 100 <= 2.5 ? level / 100 : 2.5)) * facing;
+        spr.scaleY = (1.0 + (level / 100 <= 2.5 ? level / 100 : 2.5));*/
         /*if(colHostile != null){
             //trace("Col on hostile " + Type.getClassName(colHostile.T));
             if(colHostile.T == Npc){
