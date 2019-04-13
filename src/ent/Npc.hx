@@ -1,5 +1,7 @@
 package ent;
 
+import h2d.Anim;
+import hxd.Res;
 import Game.Axis;
 import ent.Entity.ColType;
 import h2d.Drawable;
@@ -16,21 +18,38 @@ class Npc extends Character{
     public var currHp : Float;
     public var maxHp : Int;
 
-    public var spr : Bitmap;
+    //public var spr : Bitmap;
     public var back : Bitmap;
 
     var textHp : Text;
 
     public function new(x:Float, y:Float, hostile:Bool, ?hp:Int){
         var tile = Tile.fromColor((hostile? 0x550000 : 0x00FF00), 16, 16);
-        spr = new Bitmap(tile);
-        super(Npc, spr, false, (hostile ? ColType.HOSTILE : ColType.ALLY), "npc");
+        var drw = new Bitmap(tile);//Res.floortransparent.toTile());
+        var tiles = new Array<Tile>();
+        /*tiles.push(Res.mario.run1.toTile());
+		tiles.push(Res.mario.run2.toTile());*/
+        tiles.push(Res.Slime.toTile().grid(32)[0][0]);
+        tiles.push(Res.Slime.toTile().grid(32)[1][0]);
+        tiles.push(Res.Slime.toTile().grid(32)[2][0]);
+        tiles.push(Res.Slime.toTile().grid(32)[3][0]);
+        tiles.push(Res.Slime.toTile().grid(32)[4][0]);
+        var anim = new Anim(tiles, 10);
+        anim.setScale(0.5);
+        anim.pause = true;
 
-        spr.name = "hostile:npc";
+        super(Npc, anim, false, (hostile ? ColType.HOSTILE : ColType.ALLY), "npc");
+
+        //spr.name = "hostile:npc";
         this.x = x;
         this.y = y;
-        spr.tile.dx = 0;
-        spr.tile.dy = - spr.tile.height;
+        for (tile in anim.frames) {
+            tile.dx = 0;
+            tile.dy = - tile.height;
+        }
+        
+        /*drw.tile.dx = 0;
+        drw.tile.dy = - drw.tile.height;*/
         this.hostile = hostile;
         
 
@@ -42,7 +61,7 @@ class Npc extends Character{
     }
 
     public function addTo(parent:Drawable){
-        parent.addChild(spr);
+        parent.addChild(drw);
         parent.addChild(back);
     }
 
@@ -72,12 +91,13 @@ class Npc extends Character{
 
     override function update( dt : Float ) {
         super.update(dt);
-        back.x = x + (spr.tile.width / 2) - (back.tile.width / 4);
-        back.y = y - ((spr.tile.height / 2) + back.tile.height + 2);
+        back.x = x + (drw.getSize().width / 2) - (back.tile.width / 4);
+        back.y = y - ((drw.getSize().height / 2) + back.tile.height + 2);
 
         var playerEntities = parent.children.filter(f -> {f.T == Player;});
         if(playerEntities.length > 0){
-            spr.tile.switchTexture(Tile.fromColor((hostile? 0xFF0000 : 0x00FF00), 16, 16));
+            //cast(drw, Bitmap).tile.switchTexture(Tile.fromColor((hostile? 0xFF0000 : 0x00FF00), 16, 16));
+            cast(drw, Anim).pause = false;
             chase(playerEntities[0], MOVE_SPEED * dt);
         }
 
@@ -101,7 +121,7 @@ class Npc extends Character{
 
     public function kill(){
         game.player.levelUp();
-        spr.remove();
+        //drw.remove();
         back.remove();
         drw.remove();
         this.parent.children.remove(this);
