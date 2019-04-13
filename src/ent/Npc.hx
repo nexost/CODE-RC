@@ -11,7 +11,7 @@ import h2d.Bitmap;
 
 class Npc extends Character{
 
-    private static var MOVE_SPEED = 100;
+    private static var MOVE_SPEED = 50;
 
     public var type : Type;
     public var hostile : Bool;
@@ -34,7 +34,7 @@ class Npc extends Character{
         tiles.push(Res.Slime.toTile().grid(32)[2][0]);
         tiles.push(Res.Slime.toTile().grid(32)[3][0]);
         tiles.push(Res.Slime.toTile().grid(32)[4][0]);
-        var anim = new Anim(tiles, 10);
+        var anim = new Anim(tiles, 7);
         anim.setScale(0.5);
         anim.pause = true;
 
