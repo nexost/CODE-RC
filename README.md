@@ -8,11 +8,11 @@ CODE-RC (TBD) is an incremental 2D sidescroller game inspired by rogue-like and 
 
 ## The Concept
 
-You start naked.
-Go down infinite floors of a Dungeon, kill monsters, get loot, level up.
-Reach milestones.
-Die.
-Start over. Naked + Milestones reached.
+1. You start naked.
+2. Go down infinite floors of a Dungeon, kill monsters, get loot, level up.
+3. Reach milestones.
+4. Die.
+5. Start over. Naked + Milestones reached.
 
 *If you die before a milestone and you lose your progress for that milestone.*
 
