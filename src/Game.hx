@@ -80,6 +80,7 @@ class Game extends hxd.App {
             inputMoveSpeed.cursorIndex += 1;
             trace(e.keyCode);*/
             //hello from develop
+            //hello from feature-test
         //}
     }
 
